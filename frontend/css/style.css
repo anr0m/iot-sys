@@ -1,0 +1,612 @@
+/* --- Дизайн-система --- */
+:root {
+    /* Кольори фону */
+    --bg-main: #141619;       /* Темний, але не чорний фон сторінки */
+    --bg-card: #212429;       /* Трохи світліший фон для блоків/карток */
+    --bg-input: #2a2d34;      /* Фон для полів вводу */
+    
+    /* Текст */
+    --text-primary: #f0f6fc;  /* Основний білий (трохи пом'якшений) */
+    --text-secondary: #8b949e;/* Сірий для підказок та дат */
+    
+    /* Акценти та статуси */
+    --accent: #3b82f6;        /* Приємний синій для кнопок */
+    --accent-hover: #2563eb;
+    --success: #2ea043;       /* Зелений для статусу Online */
+    --error: #f85149;         /* Червоний для помилок/Offline */
+    
+    /* Форми */
+    --radius-lg: 16px;        /* Великі закруглення для карток */
+    --radius-sm: 8px;         /* Менші закруглення для кнопок/інпутів */
+    --transition: 0.2s ease-in-out;
+}
+
+/* --- Базові стилі --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* --- Типографіка --- */
+h1, h2, h3 {
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+p {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+
+/* --- Картки (Блоки) --- */
+.card {
+    background-color: var(--bg-card);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* --- Форми та Кнопки --- */
+.form-group {
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+input {
+    background-color: var(--bg-input);
+    border: 1px solid transparent;
+    color: var(--text-primary);
+    padding: 12px 16px;
+    border-radius: var(--radius-sm);
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+button {
+    background-color: var(--accent);
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: var(--radius-sm);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    width: 100%;
+}
+
+button:hover {
+    background-color: var(--accent-hover);
+}
+
+/* --- Специфічне для сторінки Auth --- */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    padding: 20px;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 400px;
+}
+
+.auth-toggle {
+    text-align: center;
+    margin-top: 16px;
+    font-size: 0.9rem;
+}
+
+.auth-toggle a {
+    color: var(--accent);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.auth-toggle a:hover {
+    text-decoration: underline;
+}
+
+.alert {
+    padding: 12px;
+    border-radius: var(--radius-sm);
+    margin-bottom: 16px;
+    font-size: 0.9rem;
+    display: none;
+}
+
+.alert.error {
+    background-color: rgba(248, 81, 73, 0.1);
+    color: var(--error);
+    border: 1px solid rgba(248, 81, 73, 0.2);
+    display: block;
+}
+
+.alert.success {
+    background-color: rgba(46, 160, 67, 0.1);
+    color: var(--success);
+    border: 1px solid rgba(46, 160, 67, 0.2);
+    display: block;
+}
+
+/* --- Layout та Навігація --- */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px;
+    width: 100%;
+}
+
+.navbar {
+    background-color: var(--bg-card);
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.nav-brand {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.nav-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.nav-link:hover {
+    color: var(--text-primary);
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Кнопка з контуром для Navbar */
+.btn-outline {
+    background-color: transparent;
+    border: 1px solid var(--text-secondary);
+    width: auto;
+    padding: 8px 16px;
+}
+
+.btn-outline:hover {
+    border-color: var(--text-primary);
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.btn-icon {
+    width: auto;
+    padding: 8px 12px;
+    background-color: var(--bg-input);
+    color: var(--text-primary);
+}
+
+/* --- Секція додавання девайсу --- */
+.link-section {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 32px;
+}
+
+.link-form {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.link-form input {
+    flex: 1;
+}
+
+.link-form button {
+    width: auto;
+    padding: 12px 24px;
+}
+
+/* --- Сітка пристроїв (Grid) --- */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.device-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+}
+
+/* --- Картка пристрою --- */
+.device-card {
+    background-color: var(--bg-card);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: var(--transition);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}
+
+.device-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.device-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 12px;
+}
+
+.device-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* Статус Online/Offline */
+.status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.status.online { color: var(--success); }
+.status.online .status-dot { background-color: var(--success); box-shadow: 0 0 8px var(--success); }
+
+.status.offline { color: var(--text-secondary); }
+.status.offline .status-dot { background-color: var(--text-secondary); }
+
+/* Сенсорні дані (Badges) */
+.sensor-data {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 16px;
+    flex: 1;
+}
+
+.sensor-badge {
+    background-color: var(--bg-input);
+    padding: 12px;
+    border-radius: var(--radius-sm);
+    flex: 1;
+    min-width: 120px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Щоб дочірні елементи не виходили за межі */
+}
+
+.sensor-type {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sensor-value {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.device-time {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    text-align: right;
+}
+
+.loading-text {
+    text-align: center;
+    color: var(--text-secondary);
+    grid-column: 1 / -1;
+    padding: 40px;
+}
+
+/* --- Tabs (Вкладки) --- */
+.tabs-container {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 16px;
+}
+
+.tab-btn {
+    background-color: transparent;
+    color: var(--text-secondary);
+    border: 1px solid transparent;
+    width: auto;
+    font-weight: 600;
+}
+
+.tab-btn:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+}
+
+.tab-btn.active {
+    background-color: rgba(59, 130, 246, 0.1);
+    color: var(--accent);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+/* --- History Controls --- */
+.history-controls {
+    margin-bottom: 24px;
+}
+
+.row-group {
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 0;
+}
+
+.row-group input[type="datetime-local"] {
+    color-scheme: dark; /* Щоб календар виглядав темним */
+}
+
+/* --- Charts Grid --- */
+.charts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 24px;
+}
+
+.chart-card {
+    background-color: var(--bg-card);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+}
+
+.chart-header {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    text-transform: capitalize;
+    display: flex;
+    justify-content: space-between;
+}
+
+.chart-latest-val {
+    color: var(--accent);
+    font-size: 1.2rem;
+}
+
+/* Контейнер для самого canvas */
+.canvas-container {
+    position: relative;
+    flex: 1;
+    width: 100%;
+}
+
+/* --- Tables --- */
+.table-container {
+    overflow-x: auto;
+    background-color: var(--bg-card);
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.data-table th {
+    padding: 16px;
+    color: var(--text-secondary);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+.data-table td {
+    padding: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+    vertical-align: middle;
+}
+
+.data-table tr:last-child td {
+    border-bottom: none;
+}
+
+.data-table tbody tr {
+    transition: var(--transition);
+}
+
+.data-table tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+/* --- Role Badges --- */
+.badge {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.badge.admin {
+    background-color: rgba(59, 130, 246, 0.2);
+    color: var(--accent);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.badge.user {
+    background-color: rgba(139, 148, 158, 0.2);
+    color: var(--text-secondary);
+    border: 1px solid rgba(139, 148, 158, 0.3);
+}
+
+.badge.blocked {
+    background-color: rgba(248, 81, 73, 0.15);
+    color: var(--error);
+    border: 1px solid rgba(248, 81, 73, 0.3);
+}
+
+.badge.active {
+    background-color: rgba(46, 160, 67, 0.15);
+    color: var(--success);
+    border: 1px solid rgba(46, 160, 67, 0.3);
+}
+
+/* --- Admin panel --- */
+/*
+.actions-cell {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+*/
+.actions-cell {
+    /* Видаляємо display: flex; flex-wrap: wrap; gap: 8px; */
+    vertical-align: middle; 
+}
+
+.actions-cell > * {
+    display: inline-block;
+    margin-right: 8px;
+    margin-bottom: 4px; /* На випадок перенесення на новий рядок */
+    vertical-align: middle;
+}
+
+.actions-cell > *:last-child {
+    margin-right: 0;
+}
+.btn-sm {
+    width: auto;
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    background-color: var(--bg-input);
+    color: var(--text-primary);
+}
+
+.btn-sm:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.btn-sm.btn-warning {
+    color: #f0ad4e;
+    border: 1px solid rgba(240, 173, 78, 0.3);
+}
+
+.btn-sm.btn-danger {
+    color: var(--error);
+    border: 1px solid rgba(248, 81, 73, 0.3);
+}
+
+.btn-sm.btn-success {
+    color: var(--success);
+    border: 1px solid rgba(46, 160, 67, 0.3);
+}
+
+.btn-sm:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.role-select {
+    background-color: var(--bg-input);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    padding: 6px 10px;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.modal-content {
+    width: 100%;
+    max-width: 440px;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.modal-actions button {
+    flex: 1;
+}
+
+.alert.hidden {
+    display: none !important;
+}

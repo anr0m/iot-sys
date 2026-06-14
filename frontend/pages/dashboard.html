@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IoT Platform - Dashboard</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-brand">🌐 IoT Platform</div>
+        <div class="nav-actions">
+            <a href="admin.html" id="adminLink" class="nav-link hidden">Admin Panel</a>
+            <button id="logoutBtn" class="btn-outline">Вийти</button>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section class="card link-section">
+            <div class="link-header">
+                <h3>🔗 Прив'язати новий пристрій</h3>
+                <p>Введіть ID вашого ESP32, щоб додати його на дашборд.</p>
+            </div>
+            <form id="linkForm" class="link-form">
+                <input type="text" id="newDeviceId" placeholder="Наприклад: ESP32_01" required>
+                <button type="submit">Додати</button>
+            </form>
+            <div id="linkAlert" class="alert" style="margin-top: 10px;"></div>
+        </section>
+
+        <section>
+            <div class="section-header">
+                <h2>Мої пристрої</h2>
+                <button id="refreshBtn" class="btn-icon">↻ Оновити</button>
+            </div>
+            
+            <div id="devicesGrid" class="device-grid">
+                <p class="loading-text">Завантаження пристроїв...</p>
+            </div>
+        </section>
+    </main>
+
+    <script src="../js/config.js"></script>
+    <script src="../js/dashboard.js"></script>
+</body>
+</html>

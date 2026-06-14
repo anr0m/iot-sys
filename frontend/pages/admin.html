@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IoT Platform - Admin Panel</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-brand">🛡️ Admin Control Panel</div>
+        <div class="nav-actions">
+            <a href="dashboard.html" class="nav-link">← Назад на Дашборд</a>
+            <button id="logoutBtn" class="btn-outline">Вийти</button>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div id="adminAlert" class="alert error hidden"></div>
+
+        <div class="charts-grid" style="grid-template-columns: repeat(3, 1fr); margin-bottom: 24px;">
+            <div class="card" style="text-align: center;">
+                <h3 style="color: var(--text-secondary); font-size: 1rem;">Користувачів</h3>
+                <div id="statUsers" style="font-size: 2.5rem; font-weight: 600;">-</div>
+            </div>
+            <div class="card" style="text-align: center;">
+                <h3 style="color: var(--text-secondary); font-size: 1rem;">Всього пристроїв</h3>
+                <div id="statDevices" style="font-size: 2.5rem; font-weight: 600;">-</div>
+            </div>
+            <div class="card" style="text-align: center;">
+                <h3 style="color: var(--success); font-size: 1rem;">Пристроїв Online</h3>
+                <div id="statOnline" style="font-size: 2.5rem; font-weight: 600;">-</div>
+            </div>
+        </div>
+
+        <h2 style="margin-bottom: 16px;">Глобальний реєстр пристроїв</h2>
+        <div class="table-container" style="margin-bottom: 32px;">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Device ID</th>
+                        <th>Статус</th>
+                        <th>Остання активність</th>
+                        <th>Власники</th>
+                        <th>Дії</th>
+                    </tr>
+                </thead>
+                <tbody id="devicesTableBody">
+                    <tr><td colspan="5" style="text-align:center;">Завантаження...</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2 style="margin-bottom: 16px;">Користувачі системи</h2>
+        <div class="table-container">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Логін</th>
+                        <th>Роль</th>
+                        <th>Статус</th>
+                        <th>Дата реєстрації</th>
+                        <th>Дії</th>
+                    </tr>
+                </thead>
+                <tbody id="usersTableBody">
+                    <tr><td colspan="6" style="text-align:center;">Завантаження...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <div id="ownersModal" class="modal hidden">
+        <div class="modal-content card">
+            <h3>Зміна власників пристрою</h3>
+            <p id="ownersModalDevice" style="margin-bottom: 12px;"></p>
+            <div class="form-group">
+                <label>ID користувачів (через кому)</label>
+                <input type="text" id="ownersInput" placeholder="наприклад: 1, 3, 5">
+                <small style="color: var(--text-secondary); margin-top: 6px;">Порожнє поле — прибрати всіх власників</small>
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="btn-outline" data-action="close-owners">Скасувати</button>
+                <button type="button" id="saveOwnersBtn">Зберегти</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/config.js"></script>
+    <script src="../js/admin.js"></script>
+</body>
+</html>

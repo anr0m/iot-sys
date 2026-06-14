@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IoT Platform - Device</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-brand" id="deviceName">🌐 Завантаження...</div>
+        <div class="nav-actions">
+            <a href="dashboard.html" class="nav-link">← Назад на Дашборд</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="tabs-container">
+            <button class="tab-btn active" id="tabLive">🔴 LIVE MODE</button>
+            <button class="tab-btn" id="tabHistory">📅 HISTORY MODE</button>
+        </div>
+
+        <div id="historyControls" class="card history-controls hidden">
+            <div class="form-group row-group">
+                <div>
+                    <label>Від:</label>
+                    <input type="datetime-local" id="historyFrom">
+                </div>
+                <div>
+                    <label>До:</label>
+                    <input type="datetime-local" id="historyTo">
+                </div>
+                <button id="loadHistoryBtn" style="width: auto; margin-top: 22px;">Завантажити</button>
+            </div>
+        </div>
+
+        <div id="chartsGrid" class="charts-grid">
+            <p class="loading-text" id="chartStatus">Очікування даних...</p>
+            </div>
+    </main>
+
+    <script src="../js/config.js"></script>
+    <script src="../js/device.js"></script>
+</body>
+</html>
